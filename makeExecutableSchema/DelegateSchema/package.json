@@ -1,0 +1,20 @@
+{
+  "name": "delegate-schema",
+  "version": "0.0.1",
+  "description": "Sample app to try out schema delegation",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-link-http": "^1.5.11",
+    "apollo-server": "^2.4.2",
+    "graphql": "^14.1.1",
+    "graphql-import": "^0.7.1",
+    "mysql2": "^1.6.5",
+    "node-fetch": "^2.3.0",
+    "promise-mysql": "^3.3.1"
+  }
+}

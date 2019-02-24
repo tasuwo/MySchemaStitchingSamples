@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: pw
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    volumes:
+      - ./mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - db-net
+  node:
+    build: ./remote-graphql-api
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: pw
+      MYSQL_PORT: 3306
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mysql
+    networks:
+      - db-net
+
+networks:
+  db-net:
+    driver: bridge

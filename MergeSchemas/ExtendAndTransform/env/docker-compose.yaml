@@ -1,0 +1,53 @@
+version: "3"
+
+services:
+  mysql-1:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: pw
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    volumes:
+      - ./mysql/init_1:/docker-entrypoint-initdb.d
+    networks:
+      - db-net-1
+  mysql-2:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: pw
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    volumes:
+      - ./mysql/init_2:/docker-entrypoint-initdb.d
+    networks:
+      - db-net-2
+  node-1:
+    build: ./remote-graphql-api-1
+    environment:
+      MYSQL_HOST: mysql-1
+      MYSQL_USER: root
+      MYSQL_PASSWORD: pw
+      MYSQL_PORT: 3306
+    ports:
+      - "4001:4000"
+    depends_on:
+      - mysql-1
+    networks:
+      - db-net-1
+  node-2:
+    build: ./remote-graphql-api-2
+    environment:
+      MYSQL_HOST: mysql-2
+      MYSQL_USER: root
+      MYSQL_PASSWORD: pw
+      MYSQL_PORT: 3306
+    ports:
+      - "4002:4000"
+    depends_on:
+      - mysql-2
+    networks:
+      - db-net-2
+
+networks:
+  db-net-1:
+    driver: bridge
+  db-net-2:
+    driver: bridge

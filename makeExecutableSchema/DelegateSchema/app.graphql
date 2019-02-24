@@ -1,0 +1,5 @@
+# import Item from "./remote.graphql"
+
+type Query {
+  hogeItems: [Item!]!
+}

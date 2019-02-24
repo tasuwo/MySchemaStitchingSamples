@@ -1,0 +1,17 @@
+{
+  "name": "remote-grahpql-api-2",
+  "version": "0.0.1",
+  "description": "Sample app",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^2.4.2",
+    "graphql": "^14.1.1",
+    "mysql2": "^1.6.5",
+    "promise-mysql": "^3.3.1"
+  }
+}
